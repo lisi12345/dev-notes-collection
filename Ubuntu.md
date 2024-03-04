@@ -21,6 +21,16 @@
 - **Kernel Version:**                              Linux 6.5.0-1005-raspi
 
 ---
+# Shortcuts
+windows key is also called Super key in Ubuntu
+- win: application overview
+- win + tab: switch between windows
+- win + l: lock the screen
+- win + a: show the application menu
+
+## Terminal
+- ctrl + alt + t: open the Terminal
+---
 # VS Code Download
 1. Go to https://code.visualstudio.com/download, .deb --> Arm64
 2. open Terminal, locate the file location. cd ./Downloads
