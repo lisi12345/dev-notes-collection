@@ -1,3 +1,5 @@
+Use the site: https://react.dev/
+---
 ## Download Node.js
 - https://nodejs.org/en/download
 - OR use nvm
@@ -17,3 +19,9 @@
       1. For example: nvm use 21.6.2
    4.  Check node.js version: node -v
 3. Update npm: npm install npm@latest -g
+
+---
+# Create a Next.js project
+- npx create-next-app@latest <folder name> --use-npm  
+    - For example: npx create-next-app@latest src --use-npm  
+- npm run dev
