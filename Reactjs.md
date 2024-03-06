@@ -22,6 +22,8 @@ Use the site: https://react.dev/
 
 ---
 # Create a Next.js project
+https://nextjs.org/learn/dashboard-app/getting-started
+
 - npx create-next-app@latest <folder name> --use-npm  
     - For example: npx create-next-app@latest src --use-npm  
 - npm run dev
