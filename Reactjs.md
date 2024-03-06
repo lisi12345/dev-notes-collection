@@ -1,3 +1,7 @@
+## Download Node.js
+- https://nodejs.org/en/download
+- OR use nvm
+  
 ## Update Node.js and npm
 1. Download nvm
    1. Windows: https://github.com/coreybutler/nvm-windows
