@@ -26,7 +26,18 @@ https://blog.mbedded.ninja/programming/operating-systems/linux/how-to-use-socket
     - display messages:
         > candump can0
 
-4. Unload PEAK:
+4. Run below script:
+   > #!/bin/bash
+    
+   > if ! ip link show can0 | grep -q "UP"; then
+   >     sudo modprobe peak_usb
+   >     sudo ip link set $1 type can bitrate $2
+   >     sudo ip link set up $1
+   > fi
+ 
+i put it in my home directory and use it with ./scriptname.sh <any name you want> <baud rate>
+
+5. Unload PEAK:
     > sudo rmmod peak_usb
 
 PCAN-USB FD: https://gist.github.com/pranav083/6be974e881ffa494e8096e5c7eb90c23
