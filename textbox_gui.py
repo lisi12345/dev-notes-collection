@@ -3,7 +3,6 @@ import sys
 from PyQt5 import QtWidgets, QtCore
 
 
-# Step 1: Create a worker class
 class GetStdout(QtCore.QObject):
     finished = QtCore.pyqtSignal()
     append = QtCore.pyqtSignal(str)
