@@ -13,7 +13,9 @@ https://blog.mbedded.ninja/programming/operating-systems/linux/how-to-use-socket
     > sudo modprobe peak_usb
     > sudo ip link set can0 up type can bitrate 500000
     > sudo ip link set can0 up
-
+    Can store above lines to a .sh file, an then in the terminal window:
+        > chmod +x ./[filename].sh
+        > ./[filename].sh
 
 2. Check if can0 is in the list
     > sudo apt install net-tools
@@ -27,8 +29,7 @@ https://blog.mbedded.ninja/programming/operating-systems/linux/how-to-use-socket
         > candump can0
 
 4. Run below script:
-   > #!/bin/bash
-    
+   > #!/bin/bashcan dump
    > if ! ip link show can0 | grep -q "UP"; then
    >     sudo modprobe peak_usb
    >     sudo ip link set $1 type can bitrate $2
