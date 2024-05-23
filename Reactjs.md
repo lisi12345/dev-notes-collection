@@ -34,3 +34,14 @@ https://nextjs.org/learn/dashboard-app/getting-started
    1. Hard coded: Add ***className="dark text-foreground bg-background"*** to **<NextUIProvider>** or other HTML tag.
    2. Dynamic switching mode/theme: use [next-themes](https://github.com/pacocoursey/next-themes)
 - [tailwind css](https://tailwindcss.com/docs/dark-mode)
+
+---
+## Issues and solutions
+#### Issue: 
+The web app fails to load data at the first launch, but the problem goes away after refreshing the page
+#### Solution:
+1. Stop the app
+2. Delete .next folder
+3. Clear browser cache and hard refresh by Fn + F5
+4. Re-run the app
+
