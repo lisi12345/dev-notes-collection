@@ -27,3 +27,10 @@ https://nextjs.org/learn/dashboard-app/getting-started
 - npx create-next-app@latest <folder name> --use-npm  
     - For example: npx create-next-app@latest src --use-npm  
 - npm run dev
+
+---
+## Dark Mode
+- [NextUI](https://nextui.org/docs/customization/dark-mode)
+   1. Hard coded: Add ***className="dark text-foreground bg-background"*** to **<NextUIProvider>** or other HTML tag.
+   2. Dynamic switching mode/theme: use [next-themes](https://github.com/pacocoursey/next-themes)
+- [tailwind css](https://tailwindcss.com/docs/dark-mode)
