@@ -38,7 +38,13 @@ https://nextjs.org/learn/dashboard-app/getting-started
 ---
 ## Issues and solutions
 #### Issue: 
-The web app fails to load data at the first launch, but the problem goes away after refreshing the page
+The web app fails to load data at the first launch, but the problem goes away after refreshing the page.
+#### Description
+When first click localhost link, the console prompts "*Uncaught SyntaxError: Invalid or unexpected token (at layout.js:356:29)*", and the page does not query data nor have any data shown. After a certain of time period, an error "*ChunkLoadError: Loading chunk app/layout failed.
+(timeout: http://localhost:3000/_next/static/chunks/app/layout.js)*" prompts.
+![alt text](image.png)
+
+Until now (5/23/2024), I have not deploy the app, so I'm not sure if the same issue will still exist in production.
 #### Solution:
 1. Stop the app
 2. Delete .next folder
