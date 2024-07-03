@@ -1,3 +1,3 @@
 # Pylint
 Generate .pylintrc file
-> pylint --generate-rcfile -encoding utf8 > {PATH}\.pylintrc
+> pylint --generate-rcfile | out-file -encoding utf8 .pylintrc
