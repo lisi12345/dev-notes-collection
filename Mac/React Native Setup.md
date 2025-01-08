@@ -29,6 +29,107 @@ If you download an application from a website, the file will typically be saved 
 9. To clean up, locate the `.dmg` file under **Locations** in Finder's sidebar.
 10. Click the up arrow to eject the `.dmg` file or right-click on it and select **Eject**.
 
-ß---
+## 3. Install Dependencies
+
+Before starting, make sure your Mac system and Xcode are up to date. Otherwise, you may get stuck or spend a significant amount of time installing Homebrew and Xcode Command Line Tools. Additionally, the process could consume most of your CPU, as I experienced.
+
+1. **Open Terminal**.
+2. **Install [Homebrew](https://brew.sh)**:
+   1. Run the following command:
+      ```
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      ```
+   2. Enter your password when prompted.
+   3. After the installation, add Homebrew to your PATH. Replace `<your username>` with your Mac username:
+      ```
+      echo >> /Users/<your username>/.zprofile
+      echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/<your username>/.zprofile
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+      ```
+   4. Confirm the installation by running:
+      ```
+      brew help
+      ```
+3. **Install nvm (Node Version Manager)**:  
+   Do not install Node.js directly with Homebrew (`brew install node`) because it will install the latest version of Node.js. Instead, install the LTS (Long Term Support) version:
+   1. Run the following command:
+      ```
+      curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+      ```
+   2. Source your shell configuration:
+      ```
+      source ~/.zshrc
+      ```
+   3. Install the Node.js LTS version:
+      ```
+      nvm install --lts
+      ```
+   4. Use the LTS version:
+      ```
+      nvm use --lts
+      ```
+   5. Check the Node.js version to ensure it’s installed:
+      ```
+      node -v
+      ```
+4. **Install CocoaPods**:
+    ```
+    sudo gem install cocoapods
+    ```
+5. **Add gem to the PATH**:
+   1. Run the following to get the **EXECUTABLE DIRECTORY**:
+      ```
+      gem env
+      ```
+   2. Edit your shell configuration:
+      ```
+      nano ~/.zshrc
+      ```
+   3. Copy the **EXECUTABLE DIRECTORY** value from the previous step and add it to the file.
+   4. Save and exit:
+      - Press `Ctrl + O` to save.
+      - Press `Ctrl + X` to exit.
+   5. Apply the changes:
+      ```
+      source ~/.zshrc
+      ```
+6. Confirm CocoaPods is added to the PATH by checking its version:
+   ```
+   pod --version
+   ```
+
+---
+
+## 4. Run the React Native App
+
+**Prerequisite**: Ensure you’ve already successfully run the app on another platform or system.
+
+1. **Transfer or Clone Your Project** to your Mac.
+2. Open the project in **Visual Studio Code**.
+3. Open the integrated terminal in Visual Studio Code.
+4. In your project directory, run:
+   ```
+   npm install
+   ```
+5. Navigate to the `ios` directory:
+   ```
+   cd ios
+   ```
+6. Install CocoaPods dependencies:
+   ```
+   pod install
+   ```
+7. Navigate back to the project root directory:
+   ```
+   cd ..
+   ```
+8. Start your app on the iOS simulator:
+   ```
+   npx react-native run-ios
+   ```
+
+**Done! Congratulations!** 🎉 Your React Native app is now running on your Mac. Let me know if you encounter any issues or need further assistance!
+
+---
 
 This guide covers everything needed to get started with running an existing React Native application on a Mac using Xcode. Let me know if any additional steps or troubleshooting tips are needed!
