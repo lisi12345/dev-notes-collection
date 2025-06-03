@@ -5,8 +5,12 @@ Generate .pylintrc file
 # requirements.txt
 > py -m pip install -U pipreqs
 > python -m  pipreqs.pipreqs src --savepath requirements.txt --force
->
-@ECHO OFF
+
+To ignore `.venv` folder:
+> pipreqs . --force --ignore .venv
+
+A batch file to get all denpendencies across code and test folder:
+> @ECHO OFF
 @REM py -m pip install -U pipreqs
 @REM python -m  pipreqs.pipreqs src --savepath srcrequirements.txt --force
 @REM python -m  pipreqs.pipreqs test --savepath testrequirements.txt --force
