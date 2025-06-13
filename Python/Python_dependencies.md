@@ -4,6 +4,7 @@ Generate .pylintrc file
 
 # requirements.txt
 > py -m pip install -U pipreqs
+> 
 > python -m  pipreqs.pipreqs src --savepath requirements.txt --force
 
 To ignore `.venv` folder:
