@@ -7,7 +7,7 @@ Generate .pylintrc file
 > 
 > python -m  pipreqs.pipreqs src --savepath requirements.txt --force
 
-To ignore `.venv` folder:
+To ignore `.venv` folder because of the error "UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb1 in position 81: invalid start byte":
 > pipreqs . --force --ignore .venv
 
 A batch file to get all denpendencies across code and test folder:
