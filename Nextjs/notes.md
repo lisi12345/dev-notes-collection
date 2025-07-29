@@ -1,4 +1,4 @@
-# Next.js notes
+# Next.js Notes
 ---
 Tutorial:
 - https://www.youtube.com/watch?v=Zq5fmkH0T78
@@ -170,6 +170,11 @@ Benefits of server side fetching:
         }
     }
     ```
+  2. File based metadata
+    - have to have a proper name directly inside the `app` folder
+    - https://nextjs.org/docs/app/getting-started/metadata-and-og-images
+    - File based metadata has higher priority and will overwrite any config based metadata.
+  
 
 and more...
 
@@ -188,15 +193,15 @@ Next.js 13+ App Router folder.
 Contains page components, layouts, templates, route segments, etc.
 Replaces the older `pages/` directory.
     In the app/
-    1. 🎯 page.tsx
+    1. page.tsx
         This is the main route page for /.
         Similar to pages/index.tsx in the old Pages Router.
         Acts as the content area rendered inside layout.tsx.
 
-        🧠 Think of it as:
-        ➡️ GET / → loads page.tsx within layout.tsx
+        Think of it as:
+        GET / → loads page.tsx within layout.tsx
 
-    2. 🧱 layout.tsx
+    2. layout.tsx
         Required in every route segment.
         Defines the shared layout structure, like headers, footers, <html>, <body>, and global styling.
 
@@ -210,16 +215,16 @@ Replaces the older `pages/` directory.
         );
         }
         
-        📌 Without this, Next.js will throw an error.
+        Without this, Next.js will throw an error.
         Acts like a parent for all of routes, It allows you to share UI elements across multiple pages (navbar, footer)
 
-    3. 🎨 globals.css
+    3. globals.css
         Your global CSS styles.
         Usually imported in layout.tsx like:
         >import './globals.css';
         Useful for Tailwind base layers, global resets, fonts, etc.
 
-    4. 🖼️ favicon.ico
+    4. favicon.ico
         Your site's favicon.
         Linked automatically when placed in app/.
         No need to manually add <link rel="icon"> — Next.js handles it.
@@ -284,6 +289,8 @@ Controls:
     - Module resolution
     - Type checking behavior
 Used by both Next.js + your IDE for autocomplete and type safety.
+
+---
 
 ## Run the app
 ```
