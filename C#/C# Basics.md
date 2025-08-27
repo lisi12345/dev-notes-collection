@@ -333,6 +333,8 @@ anotherAge = 39;
 Console.WriteLine(myAge); // Output: 50
 Console.WriteLine(anotherAge); // Output: 39
 ```
+
+```
 static void Structs()
 {
     Console.WriteLine("=========== Structs = value types ===========");
@@ -362,7 +364,6 @@ myAge and anotherAge are independent copies, so changes to anotherAge do not aff
 
 
 ```
-
 static void Records()
 {
     Console.WriteLine("=========== Records = reference or value types ===========");
@@ -388,8 +389,167 @@ static void Records()
 
 }
 ```
+
 Recods work like class or strcut depending on how you define them, can be reference type or value type
 
+### Equality Comparison
+- Classes: Equality comparisons for classes are based on **reference equality**. Two class instances are considered equal if they reference the same object.
+- Structs: By default, structs use **value equality**, abd they do not support equality comparisons using the == operator. You can define custom equality operators to compare the values of struct instances.
+- Records: Records use **value equality** by default, meaning two record instances are considered equal if their values are the same, even if they are different objects.
+
+Example of custom equality operators:
+```
+public struct SPoint
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    // create customed operator
+    public static bool operator == (SPoint a, SPoint b) => a.X == b.X   &&  a.Y == b.Y;
+    public static bool operator != (SPoint a, SPoint b) => a.X != b.X   ||  a.Y != b.Y;
+}
+
+static void Structs()
+{
+    Console.WriteLine("=================Structs=================");
+    SPoint p1 = new SPoint { X = 7, Y = 3 };
+    SPoint p2 = p1;
+
+    // use customed operator
+    Console.WriteLine($"P1 = P2: {p1 == p2}");
+    // if value comparison:
+    Console.WriteLine($"P1 = P2: {p1.equals(p2)}");
+    
+
+    SPoint p3 = new SPoint { X = 7, Y = 3 };
+
+    Console.WriteLine($"P1 = P3: {p1 == p3}");
+    Console.WriteLine();
+}
+```
+
+### Abstract Class
+- Abstract Classes: These are base classes that cannot be instantiated directly. They are meant to be inherited by other classes that provide implementations for the abstract methods.
+- Abstract Methods: Methods declared in an abstract class without an implementation. Derived classes must override these methods and provide an implementation.
+- Virtual Methods: Methods in an abstract class that have a default implementation but can be overridden by derived classes.
+- Usage in Derived Classes: Derived classes must implement abstract methods from the base class. They can also override virtual methods or create new implementations.
+- Can't create instance
+
+Here are the key differences between an interface and an abstract class in C#:
+
+| Feature          | Abstract Class                                                                                        | Interface                                                                                               |
+| ---------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Methods          | Can contain both abstract methods (without implementation) and concrete methods (with implementation) | Can only contain method signatures (no implementation), properties, events, and indexers                |
+| Fields           | Can have fields                                                                                       | Cannot have fields                                                                                      |
+| Constructors     | Can have constructors                                                                                 | Cannot have constructors                                                                                |
+| Access Modifiers | Can have access modifiers                                                                             | Cannot have access modifiers (all members are public by default)                                        |
+| Inheritance      | A class can inherit from only one abstract class                                                      | A class can implement multiple interfaces                                                               |
+| Usage            | Used when you want to provide a common base class with some shared code                               | Used to define a contract that implementing classes must follow without dictating how they should do so |
 
 
+```
+public interface IPerson
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+
+public abstract class Employee : IPerson
+{
+    //IPerson
+    public string LastName { get; set; }
+    public string FirstName { get; set; }
+
+
+    public DateOnly StartDate { get; set; }
+
+    //virtual property
+    public virtual DateTime EndDate { get; set; }
+
+    //abstract property
+    public abstract int EmployeeId { get; }
+
+    //derived must implement
+    public abstract bool ProcessPayroll();  
+
+    //derived can implement
+    public virtual void Terminate(DateTime terminationEffectiveDate)
+    {
+        Console.WriteLine("Employee terminated");
+        EndDate = terminationEffectiveDate;
+    }
+
+    //derived can call or hide
+    public bool IsActive()
+    {
+        Console.WriteLine("Employee Active");
+        DateOnly current = DateOnly.FromDateTime(DateTime.Now);
+        return current > StartDate && DateTime.Now < EndDate;
+    }
+}
+
+public class ShiftWorker : Employee
+{
+    public TimeOnly ShiftStartTime { get; set; }
+    public override int EmployeeId { get => 1; } // derived, override
+
+    public override bool ProcessPayroll() // override abstract
+    {
+        Console.WriteLine("Shiftworker payroll");
+        return true;
+    }
+    public new bool IsActive() // expilictly states new implementation
+    {
+        Console.WriteLine("Shiftworker active");
+        return false;
+    }
+}
+
+public class Manager : Employee, IPerson
+{
+    public int NumberOfDirectReports { get; set; }
+    public override int EmployeeId { get=> new System.Random().Next(1,100); }  // have to implement abstract
+
+    public override bool ProcessPayroll() // have to implement abstract
+    {
+        Console.WriteLine("Manager payroll");
+        return true;
+    }
+
+    public new void Terminate(DateTime terminationEffectiveDate)
+    {
+        //perform manager specific termination steps
+        Console.WriteLine("Manager terminated");
+
+        //optional - call base implementation
+        base.Terminate(terminationEffectiveDate);
+    }
+}
+```
+
+### Creating Static Class
+- Static Classes: These are classes that **cannot be instantiated**. They are used to hold static members that are shared across all instances.
+- Static Constructors: These are used to initialize static fields or perform actions that need to be done once. They are called automatically before any static members are accessed.
+- Common Uses: Static classes are often used for constants, configuration keys, and helper methods that do not require an instance of the class.
+- to encapsulate operations that don't require an instance of an object
+
+Here's a comparison of different types of classes in C# along with their definitions, use cases, and common access modifiers:
+
+| Class Type     | Definition                                                                                                                                                                                    | Use Case                                                                                                                                        | Access Modifiers                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Instance Class | Regular classes that can be instantiated.                                                                                                                                                     | Used when you need to create multiple objects with the same properties and methods.                                                             | public, private, protected, internal |
+| Static Class   | Classes that cannot be instantiated and contain only static members.                                                                                                                          | Used for utility or helper methods, constants, and configuration keys that are shared across all instances.                                     | public, private                      |
+| Abstract Class | Classes that cannot be instantiated and are designed to be inherited by other classes. They can contain abstract methods (without implementation) and concrete methods (with implementation). | Used when you want to provide a common base class with some shared implementation and some methods that must be implemented by derived classes. | public, protected                    |
+| Sealed Class   | Classes that cannot be inherited.                                                                                                                                                             | Used when you want to prevent further inheritance to ensure the class's behavior remains unchanged.                                             | public, private                      |
+| Partial Class  | Classes that can be split into multiple files.                                                                                                                                                | Used to manage large classes by splitting them into multiple files for better organization and maintainability.                                 | public, private, protected, internal |
+
+```
+
+        public static readonly string CONFIG_SERVER_NAME = "TargetServer";
+        public const string CONFIG_DB_NAME = "DatabaseName";
+```
+| Field Type             | Definition                                                                         | Use Case                                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| public static readonly | A field that can be assigned a value at runtime and is read-only after assignment. | Used for values that are initialized once and may be set at runtime, such as configuration keys.      |
+| public const           | A field that is a compile-time constant and cannot be changed after compilation.   | Used for values that are known at compile time and will never change, such as mathematical constants. |
 
